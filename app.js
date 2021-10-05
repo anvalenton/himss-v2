@@ -1,5 +1,5 @@
-/** Demo app for routing. */
-
+const path = require('path');
+// const env = require('dotenv').config({path:path.resolve(__dirname+"/.env")})
 const express = require("express");
 const app = express();
 // const cors = require("cors");
@@ -27,13 +27,14 @@ async function populateTickets() {
 populateTickets()
 
 app.use(express.json());
-// app.use(cors({
-//     origin: "http://localhost:3000",
-// }))
+app.use(cors({
+    origin: "http://localhost:3000",
+}))
 
 // Have Node serve the files for our built React app
-if (process.env.NODE.ENV === 'production') {
-
+console.log('env is', process.env.NODE.ENV);
+if (process.env.NODE.ENV === 'development') {
+    console.log('yo here');
     app.use(express.static('client/build'));
 
     // All other GET requests not handled before will return our React app
