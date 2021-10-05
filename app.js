@@ -11,7 +11,7 @@ const cors = require("cors");
 const axios = require('axios');
 const spam = require("./fakeDb");
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 5000;
 
 
 //populate fakeDB at outset

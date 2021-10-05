@@ -10,7 +10,7 @@ function App() {
   async function blockTicket(ticket) {
 
     try {
-      const blockTix = await axios.post("http://localhost:3001/block", ticket )
+      const blockTix = await axios.post("http://localhost:5000/block", ticket )
 
       if (blockTix.status === 200) {
         setSpamTickets(spamTickets.map((elem) => {
@@ -37,7 +37,7 @@ function App() {
   async function resolveTicket(ticket, id) {
 
     try {
-      const resolveTix = await axios.put(`http://localhost:3001/reports/${id}`)
+      const resolveTix = await axios.put(`http://localhost:5000/reports/${id}`)
 
       if (resolveTix.status === 200) {
       
