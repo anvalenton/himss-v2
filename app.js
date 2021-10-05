@@ -2,7 +2,7 @@
 
 const express = require("express");
 const app = express();
-const cors = require("cors");
+// const cors = require("cors");
 const axios = require('axios');
 const spam = require("./fakeDb");
 
@@ -27,9 +27,9 @@ async function populateTickets() {
 populateTickets()
 
 app.use(express.json());
-app.use(cors({
-    origin: "http://localhost:3000",
-}))
+// app.use(cors({
+//     origin: "http://localhost:3000",
+// }))
 
 // Have Node serve the files for our built React app
 if (process.env.NODE.ENV === 'production') {
