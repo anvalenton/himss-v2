@@ -32,7 +32,16 @@ app.use(cors({
 }))
 
 // Have Node serve the files for our built React app
-app.use(express.static(path.resolve(__dirname, '../client/build')));
+if (process.env.NODE.ENV === 'production') {
+
+    app.use(express.static(path.resolve(__dirname, './client/build')));
+
+    // All other GET requests not handled before will return our React app
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
+  });
+}
+
 
 
 app.post("/block", (req,res, next) => {
@@ -59,12 +68,9 @@ app.put("/reports/:reportId", (req,res, next) => {
     
 })
 
-// All other GET requests not handled before will return our React app
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
-  });
 
-  
+
+
 // generic error handler
 app.use(function(err, req, res, next) {
   // the default status is 500 Internal Server Error
