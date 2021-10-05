@@ -1,8 +1,13 @@
 const path = require('path');
-// const env = require('dotenv').config({path:path.resolve(__dirname+"/.env")})
+const env = require('dotenv').config({path:path.resolve(__dirname+"/.env")})
+
+//dot env does not work
+// const dotenv = require('dotenv');
+// dotenv.config()
+
 const express = require("express");
 const app = express();
-// const cors = require("cors");
+const cors = require("cors");
 const axios = require('axios');
 const spam = require("./fakeDb");
 
@@ -32,8 +37,10 @@ app.use(cors({
 }))
 
 // Have Node serve the files for our built React app
-console.log('env is', process.env.NODE.ENV);
-if (process.env.NODE.ENV === 'development') {
+console.log('process env is', process.env.NODE_ENV);
+console.log('env is', env);
+
+if (process.env.NODE_ENV === 'production') {
     console.log('yo here');
     app.use(express.static('client/build'));
 
@@ -44,10 +51,8 @@ if (process.env.NODE.ENV === 'development') {
   });
 }
 
-
-
 app.post("/block", (req,res, next) => {
-
+    console.log('inside block')
     try {
         spam[req.body.id].state = 'BLOCKED'
         return res.status(200).send();
