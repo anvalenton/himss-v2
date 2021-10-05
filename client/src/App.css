@@ -1,0 +1,43 @@
+
+html, body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.mainbody {
+  width: 97%;
+}
+
+.ticket-container {
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 1vw;
+
+}
+
+.idstate-container {
+ 
+  width: 45%;
+}
+
+.typemsg-container {
+
+  width: 30%;
+}
+
+.button-container {
+
+  display: flex;
+  flex-direction: column;
+
+}
+.infodiv {
+  margin: 3px;
+}
+button {
+  margin: 3px;
+}
