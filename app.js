@@ -5,7 +5,7 @@ const app = express();
 const cors = require("cors");
 const axios = require('axios');
 const spam = require("./fakeDb");
-const path = require('path');
+
 const PORT = process.env.PORT || 3001;
 
 
@@ -37,6 +37,7 @@ if (process.env.NODE.ENV === 'production') {
     app.use(express.static('client/build'));
 
     // All other GET requests not handled before will return our React app
+    // const path = require('path');
     app.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
