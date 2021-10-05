@@ -10,7 +10,8 @@
     "heroku-postbuild": "npm install --prefix client && npm run build --prefix client"
   },
   "engines": {
-    "node" : "16.9.1"
+    "node" : "16.9.1",
+    "npm": "7.21.1"
   },
   "buildpacks": {
     "url": "heroku/nodejs"
