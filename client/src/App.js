@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 
 
+
 function App() {
 
-  const result = dotenv.config();
-  if (result.error) {throw result.error}
+
   const [spamTickets, setSpamTickets] = useState([]);
 
   async function blockTicket(ticket) {
@@ -15,20 +15,18 @@ function App() {
       const blockTix = await axios.post(`${process.env.REACT_APP_API_URL}/block`, ticket )
 
       if (blockTix.status === 200) {
+
         setSpamTickets(spamTickets.map((elem) => {
          
-          if (elem !== ticket) {return elem}
-          else if (elem === ticket) {
+          if (elem === ticket) {
             elem.state = 'BLOCKED'
             return elem
           }
-          
+          else {return elem}
           }))
 
-        
-      }
 
-  }
+  }}
     catch (e) {
         throw new Error('Unable to Block Ticket');
     }
