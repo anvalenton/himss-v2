@@ -5,12 +5,14 @@ import axios from 'axios';
 
 function App() {
 
+  const result = dotenv.config();
+  if (result.error) {throw result.error}
   const [spamTickets, setSpamTickets] = useState([]);
 
   async function blockTicket(ticket) {
 
     try {
-      const blockTix = await axios.post("http://localhost:5000/block", ticket )
+      const blockTix = await axios.post(`${process.env.REACT_APP_API_URL}/block`, ticket )
 
       if (blockTix.status === 200) {
         setSpamTickets(spamTickets.map((elem) => {
@@ -37,7 +39,7 @@ function App() {
   async function resolveTicket(ticket, id) {
 
     try {
-      const resolveTix = await axios.put(`http://localhost:5000/reports/${id}`)
+      const resolveTix = await axios.put(`${process.env.REACT_APP_API_URL}/reports/${id}`)
 
       if (resolveTix.status === 200) {
       

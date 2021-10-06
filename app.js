@@ -41,7 +41,7 @@ console.log('process env is', process.env.NODE_ENV);
 console.log('env is', env);
 
 if (process.env.NODE_ENV === 'production') {
-    console.log('yo here');
+   
     app.use(express.static('client/build'));
 
     // All other GET requests not handled before will return our React app
@@ -52,7 +52,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.post("/block", (req,res, next) => {
-    console.log('inside block')
+    
     try {
         spam[req.body.id].state = 'BLOCKED'
         return res.status(200).send();
