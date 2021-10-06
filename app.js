@@ -1,16 +1,9 @@
 const path = require('path');
-const env = require('dotenv').config({path:path.resolve(__dirname+"/.env")})
-
-//dot env does not work
-// const dotenv = require('dotenv');
-// dotenv.config()
-
 const express = require("express");
 const app = express();
 const cors = require("cors");
 const axios = require('axios');
 const spam = require("./fakeDb");
-
 const PORT = process.env.PORT || 5000;
 
 
@@ -32,27 +25,22 @@ async function populateTickets() {
 populateTickets()
 
 app.use(express.json());
+//below allows cross origin requests
 app.use(cors({
     origin: "http://localhost:3000",
 }))
 
-// Have Node serve the files for our built React app
-console.log('process env is', process.env.NODE_ENV);
-console.log('env is', env);
 
 if (process.env.NODE_ENV === 'production') {
    
     app.use(express.static('client/build'));
 
-    // All other GET requests not handled before will return our React app
-    // const path = require('path');
     app.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
 
 app.post("/block", (req,res, next) => {
-    console.log('inside block YYYY');
     try {
         spam[req.body.id].state = 'BLOCKED'
         return res.status(200).send();
