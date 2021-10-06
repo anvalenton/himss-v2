@@ -52,7 +52,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.post("/block", (req,res, next) => {
-    
+    console.log('inside block YYYY');
     try {
         spam[req.body.id].state = 'BLOCKED'
         return res.status(200).send();
