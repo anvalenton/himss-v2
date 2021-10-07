@@ -14,12 +14,12 @@ async function populateTickets() {
         const spamTix = await axios.get("https://raw.githubusercontent.com/morkro/coding-challenge/master/data/reports.json")       
         for (let sub of spamTix.data.elements) {
             spam[sub.id] = sub;
-        }        
+        }  
+
     }
     catch (e) {
             throw new Error('Unable to get tickets');
         }
-    
 }
 
 populateTickets()
@@ -40,7 +40,20 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.post("/block", (req,res, next) => {
+app.get("/spam", (req, res, next) => {
+
+    try {
+        res.send(spam);
+
+    }
+    catch(e) {
+        next(e)
+    }
+
+
+})
+
+app.post("/spam", (req,res, next) => {
     try {
         spam[req.body.id].state = 'BLOCKED'
         return res.status(200).send();

@@ -8,6 +8,7 @@ html, body {
 }
 .mainbody {
   width: 97%;
+  margin-bottom: 2vh;
 }
 
 .ticket-container {
@@ -16,6 +17,7 @@ html, body {
   align-items: center;
   justify-content: space-evenly;
   padding: 1vw;
+  
 
 }
 
@@ -40,4 +42,9 @@ html, body {
 }
 button {
   margin: 3px;
+}
+
+.blocked {
+
+  color: red;
 }
