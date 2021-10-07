@@ -7,28 +7,27 @@ const spam = require("./fakeDb");
 const PORT = process.env.PORT || 5000;
 
 
-//populate fakeDB at outset
-async function populateTickets() {
-
-    try {
-        const spamTix = await axios.get("https://raw.githubusercontent.com/morkro/coding-challenge/master/data/reports.json")       
-        for (let sub of spamTix.data.elements) {
-            spam[sub.id] = sub;
-        }  
-
-    }
-    catch (e) {
-            throw new Error('Unable to get tickets');
-        }
-}
-
-populateTickets()
-
 app.use(express.json());
+
+
 //below allows cross origin requests
 app.use(cors({
     origin: "http://localhost:3000",
 }))
+
+app.get("/spam", async (req, res, next) => {
+    try {
+        const spamTix = await axios.get("https://raw.githubusercontent.com/morkro/coding-challenge/master/data/reports.json");    
+        for (let sub of spamTix.data.elements) {
+            spam[sub.id] = sub;
+        } 
+        res.send(spam);
+
+    }
+    catch(e) {
+        next(e)
+    }
+})
 
 
 if (process.env.NODE_ENV === 'production') {
@@ -39,19 +38,6 @@ if (process.env.NODE_ENV === 'production') {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
-
-app.get("/spam", (req, res, next) => {
-
-    try {
-        res.send(spam);
-
-    }
-    catch(e) {
-        next(e)
-    }
-
-
-})
 
 app.post("/spam", (req,res, next) => {
     try {

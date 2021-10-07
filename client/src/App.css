@@ -7,8 +7,9 @@ html, body {
   width: 100%;
 }
 .mainbody {
-  width: 97%;
+  width: 92vw;
   margin-bottom: 2vh;
+  border: 1px solid red;
 }
 
 .ticket-container {
@@ -22,7 +23,7 @@ html, body {
 }
 
 .idstate-container {
- 
+
   width: 45%;
 }
 

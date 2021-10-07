@@ -6,7 +6,7 @@ import axios from 'axios';
 
 function App() {
 
-  
+ 
   const [spamTickets, setSpamTickets] = useState([]);
 
   async function blockTicket(ticket) {
@@ -53,10 +53,12 @@ function App() {
  
   
   async function getTickets() {
-
+   
       try {
           const spamTix = await axios.get(`${process.env.REACT_APP_API_URI}/spam`)
+        
           const arrOfTix =  Object.keys(spamTix.data).map((key) => spamTix.data[key]).filter((elem) => elem.id !== undefined);
+          
           setSpamTickets(arrOfTix);
         
       }
