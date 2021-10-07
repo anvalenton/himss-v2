@@ -39,8 +39,7 @@ function App() {
       const resolveTix = await axios.put(`${process.env.REACT_APP_API_URI}/reports/${id}`)
 
       if (resolveTix.status === 200) {
-      
-        setSpamTickets(spamTickets.filter((elem) => elem !== ticket))
+          setSpamTickets(spamTickets.filter((elem) => (elem.id !== id)))
       }
 
   }
@@ -85,7 +84,7 @@ function App() {
         <h1>Reports</h1>
 
         <div className='tickets-maincontainer'>
-            {spamTickets.filter((elem) => elem.state !== 'RESOLVED').map((elem, idx) => {
+            {spamTickets.map((elem, idx) => {
             
                   return <div key={idx} className={`ticket-container ${elem.state === 'BLOCKED'? 'blocked' : null}`}>
                         <div className='idstate-container' >

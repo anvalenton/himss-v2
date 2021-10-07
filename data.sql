@@ -1,19 +1,29 @@
-DROP DATABASE IF EXISTS usersdb;
+DROP DATABASE IF EXISTS spamdb
 
-CREATE DATABASE usersdb;
+CREATE DATABASE spamdb
 
-\c usersdb;
+\c spamdb;
 
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS spam
 
-CREATE TABLE users
+CREATE TABLE spam
 (
   id SERIAL PRIMARY KEY,
-  name text NOT NULL,
-  type text NOT NULL
+  ticket_id text NOT NULL,
+  source text NOT NULL,
+  source_identity_id text NOT NULL,
+  reference_id text NOT NULL,
+  reference_type text NOT NULL,
+  ticketstate text NOT NULL,
+  payload_source text NOT NULL,
+  payload_report_type text NOT NULL,
+  payload_message text,
+  payload_report_id text NOT NULL,
+  paylod_ref_resource_id text NOT NULL,
+  paylod_ref_resource_type text NOT NULL,
+  payload_created text NOT NULL
+
 );
 
-INSERT INTO users
-  (name, type)
-VALUES
-  ('Juanita', 'admin'); 
+--USE INDEX?
+--SPLIT TABLES?

@@ -19,7 +19,7 @@ async function populateFakeDB() {
     }
 
     catch(e) {
-        next(e)
+        next(e);
     }
 
 }
@@ -30,16 +30,17 @@ app.use(cors({
 }))
 
 app.get("/spam", (req, res, next) => {
-    
+
     try {
         res.send(spam);
 
     }
     catch(e) {
-        next(e)
+        next(e);
     }
 })
 
+//heroku conditional to serve index.html file since cannot access direct
 if (process.env.NODE_ENV === 'production') {
    
     app.use(express.static('client/build'));
@@ -51,7 +52,7 @@ if (process.env.NODE_ENV === 'production') {
 
 app.post("/spam", (req,res, next) => {
     try {
-        spam[req.body.id].state = 'BLOCKED'
+        spam[req.body.id].state = 'BLOCKED';
         return res.status(200).send();
     }
     catch(e){
@@ -63,7 +64,8 @@ app.post("/spam", (req,res, next) => {
 app.put("/reports/:reportId", (req,res, next) => {
     try {
         let id = req.params.reportId;
-        spam[id].state = 'RESOLVED'
+        // spam[id].state = 'RESOLVED'
+        delete spam[id];
         return res.status(200).send();
     }
     catch(e){
