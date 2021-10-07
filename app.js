@@ -9,18 +9,28 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 
+async function populateFakeDB() {
 
-//below allows cross origin requests
-app.use(cors({
-    origin: "http://localhost:3000",
-}))
-
-app.get("/spam", async (req, res, next) => {
     try {
         const spamTix = await axios.get("https://raw.githubusercontent.com/morkro/coding-challenge/master/data/reports.json");    
         for (let sub of spamTix.data.elements) {
             spam[sub.id] = sub;
         } 
+    }
+
+    catch(e) {
+        next(e)
+    }
+
+}
+populateFakeDB()
+//below allows cross origin requests
+app.use(cors({
+    origin: "http://localhost:3000",
+}))
+
+app.get("/spam", (req, res, next) => {
+    try {
         res.send(spam);
 
     }
@@ -28,7 +38,6 @@ app.get("/spam", async (req, res, next) => {
         next(e)
     }
 })
-
 
 if (process.env.NODE_ENV === 'production') {
    
