@@ -30,6 +30,7 @@ app.use(cors({
 }))
 
 app.get("/spam", (req, res, next) => {
+    
     try {
         res.send(spam);
 

@@ -55,11 +55,16 @@ function App() {
   async function getTickets() {
    
       try {
-          const spamTix = await axios.get(`${process.env.REACT_APP_API_URI}/spam`)
-        
+          const spamTix = await axios.get(`${process.env.REACT_APP_API_URI}/spam`);
+
           const arrOfTix =  Object.keys(spamTix.data).map((key) => spamTix.data[key]).filter((elem) => elem.id !== undefined);
-          
-          setSpamTickets(arrOfTix);
+
+          //conditional for heroku deploy.
+          const spamTixFromGH = await axios.get("https://raw.githubusercontent.com/morkro/coding-challenge/master/data/reports.json");
+          const arrOfTixNotEmpty = arrOfTix.length === 0? spamTixFromGH : arrOfTix;
+          //end of heroku only code
+
+          setSpamTickets(arrOfTixNotEmpty);
         
       }
       catch (e) {
