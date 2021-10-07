@@ -1,8 +1,10 @@
 # himss-v2
 
-/client - contains front end files /n
-/client/build - contains build files /n
-/client/src - contains React components /n
+/client - contains front end files \
+/client/build - contains build files \
+/client/src - contains React components \
+
+.env file contains environment variables \
 
 
 
